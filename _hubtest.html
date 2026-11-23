@@ -3,6 +3,12 @@
 <html>
 <head>
 <script>
+window.__errs=[];
+function show(m){window.__errs.push(m); document.title='ERR: '+window.__errs.join(' | ').slice(0,300);}
+window.addEventListener('error', function(e){ show((e.message||'err')+' @ '+(e.filename||'')+':'+(e.lineno||'')); }, true);
+window.addEventListener('unhandledrejection', function(e){ show('reject: '+((e.reason&&e.reason.message)||e.reason)); });
+</script>
+<script>
 (function () {
   if (window.__ugsBoot) return;
   window.__ugsBoot = 1;
