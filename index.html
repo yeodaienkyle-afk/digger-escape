@@ -11,8 +11,13 @@
 (function(){
 	window._JS_SystemInfo_GetDocumentURL = function(buffer, bufferSize) {
 		var url = new URL(".", location.href).href;
-		if (buffer) stringToUTF8(url, buffer, bufferSize);
-		return lengthBytesUTF8(url);
+		try {
+			if (typeof stringToUTF8 === "function" && typeof lengthBytesUTF8 === "function") {
+				if (buffer) stringToUTF8(url, buffer, bufferSize);
+				return lengthBytesUTF8(url);
+			}
+		} catch (e) {}
+		return url.length;
 	};
 })();
 </script>
