@@ -188,7 +188,7 @@ window.addEventListener('unhandledrejection', function(e){ show('reject: '+((e.r
 
 </script>
 <script>window.__UGS_GAME_ID="cldiggerscape.html";</script>
-<base href="https://cdn.jsdelivr.net/gh/yeodaienkyle-afk/digger-escape@00a214e8b9790098ec326e33923f33444ac12f8b/">
+<base href="https://cdn.jsdelivr.net/gh/yeodaienkyle-afk/digger-escape@a65a6fd54ff2416a21453db5974ee40354526b6d/">
 <meta charset="UTF-8">
 <title>Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -199,8 +199,13 @@ window.addEventListener('unhandledrejection', function(e){ show('reject: '+((e.r
 (function(){
 	window._JS_SystemInfo_GetDocumentURL = function(buffer, bufferSize) {
 		var url = new URL(".", location.href).href;
-		if (buffer) stringToUTF8(url, buffer, bufferSize);
-		return lengthBytesUTF8(url);
+		try {
+			if (typeof stringToUTF8 === "function" && typeof lengthBytesUTF8 === "function") {
+				if (buffer) stringToUTF8(url, buffer, bufferSize);
+				return lengthBytesUTF8(url);
+			}
+		} catch (e) {}
+		return url.length;
 	};
 })();
 </script>
